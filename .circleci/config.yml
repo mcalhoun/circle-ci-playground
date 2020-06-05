@@ -57,7 +57,7 @@ references:
   notify_slack_prod: &notify_slack_prod
     slack/status:
       failure_message: ":red_circle: $CIRCLE_JOB has failed on master! Build triggered by: $CIRCLE_USERNAME. You have one hour to fix or revert!!"
-      success_message: ":tada: prod (static) has been successfully deployed at version $CIRCLE_SHA1 to https://gruntwork.io"
+      success_message: ":tada: prod (static) has been successfully deployed at version $CIRCLE_TAG to https://gruntwork.io"
 
 #######################################################################################################################
 # The build jobs available, all consisting of lists of references to the references section above
