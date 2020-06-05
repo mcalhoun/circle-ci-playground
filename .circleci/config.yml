@@ -63,13 +63,9 @@ jobs:
     description: Deploy to Staging
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - *install-pip
       - awscli/install
-      - ruby/install-deps:
-          bundler-version: 1.17.2
-          with-cache: false
       - *deploy-to-staging
       - *notify_slack_on_failure
 
@@ -78,13 +74,9 @@ jobs:
     description: Deploy to Prod
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
       - *install-pip
       - awscli/install
-      - ruby/install-deps:
-          bundler-version: 1.17.2
-          with-cache: false
       - *deploy-to-prod
       - *notify_slack_on_failure
 
