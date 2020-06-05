@@ -48,10 +48,10 @@ references:
         set +o pipefail
         echo "on tag, deploying to prod"
 
-  notify_slack: &notify_slack_on_failure
+  notify_slack_staging: &notify_slack_staging
     slack/status:
-      fail_only: true
       failure_message: ":red_circle: $CIRCLE_JOB has failed on master! Build triggered by: $CIRCLE_USERNAME. You have one hour to fix or revert!!"
+      success_message: ":tada: stage (static) has been successfully deployed at version $CIRCLE_SHA1 to https://www.dogfood-stage.com"
       only_for_branches: "master"
 
 #######################################################################################################################
@@ -67,7 +67,7 @@ jobs:
       - *install-pip
       - awscli/install
       - *deploy-to-staging
-      - *notify_slack_on_failure
+      - *notify_slack_staging
 
   deploy-to-prod:
     <<: *base_container
@@ -78,7 +78,7 @@ jobs:
       - *install-pip
       - awscli/install
       - *deploy-to-prod
-      - *notify_slack_on_failure
+      - *notify_slack_staging
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Here we combine the jobs defined above into various workflows that can run in parallel or sequentially, define
